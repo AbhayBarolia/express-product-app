@@ -1,8 +1,7 @@
 const path = require("path");
-
+const Product= require('../models/product');
 const rootDir=require('../util/paths');
 
-const products=[];
 
 exports.getAddProduct=(req,res,nexr)=>{
     console.log("add-product");
@@ -10,11 +9,14 @@ exports.getAddProduct=(req,res,nexr)=>{
 }
 
 exports.postAddProduct=(req,res,next)=>{
-    console.log(req.body);
+    const product= new Product(req.body.title);
+    product.saveProducts();
     res.redirect('/');
     }
 
 exports.getProduct=(req,res,next)=>{
-    console.log("/ middeleware ");
-    res.sendFile(path.join(rootDir,'views','shop.html'));
+    Product.fetchAllProducts(products=>{
+        res.sendFile(path.join(rootDir,'views','shop.html'));
+    } );
+    
     }
