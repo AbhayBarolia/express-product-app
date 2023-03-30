@@ -1,10 +1,6 @@
-const express= require("express");
 const path= require('path');
-const router= express.Router();
 const rootDir=require('../util/paths');
 
-router.use((req,res,next)=>{
+exports.get404Error=(req,res,next)=>{
     res.status(404).sendFile(path.join(rootDir,'views','404.html'));
-})
-
-module.exports = router;
+}
