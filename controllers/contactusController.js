@@ -3,7 +3,12 @@ const rootDir=require('../util/paths');
 
 
 exports.getContactPage=(req,res,next)=>{
-    res.sendFile(path.join(rootDir,'views','contactus.html'));
+    res.render('contactus', {
+        pageTitle: 'contact-us',
+        path: '/contact-us',
+        activeContactUS: true,
+        contactusCSS: true
+      });
     }
 
 
@@ -12,7 +17,12 @@ exports.PostContactDetails=(req,res,next)=>{
     }
 
 exports.successPage=(req,res,next)=>{
-    res.sendFile(path.join(rootDir,'views','contactsuccess.html'));
+    res.render('contactsuccess', {
+        pageTitle: 'success',
+        path: '/success',
+        activeContactUS: true,
+        contactusCSS: true
+      });
     } 
 
 exports.successRedirect=(req,res,next)=>{

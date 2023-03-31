@@ -1,11 +1,17 @@
 const path = require("path");
 const Product= require('../models/product');
 const rootDir=require('../util/paths');
+const express = require('express');
 
 
 exports.getAddProduct=(req,res,nexr)=>{
-    console.log("add-product");
-    res.sendFile(path.join(rootDir,'views','product.html'));
+    res.render('add-product', {
+        pageTitle: 'Add Product',
+        path: '/admin/add-product',
+        formsCSS: true,
+        productCSS: true,
+        activeAddProduct: true
+      });
 }
 
 exports.postAddProduct=(req,res,next)=>{
@@ -16,7 +22,14 @@ exports.postAddProduct=(req,res,next)=>{
 
 exports.getProduct=(req,res,next)=>{
     Product.fetchAllProducts(products=>{
-        res.sendFile(path.join(rootDir,'views','shop.html'));
+        res.render('shop', {
+            prods: products,
+            pageTitle: 'Shop',
+            path: '/',
+            hasProducts: products.length > 0,
+            activeShop: true,
+            productCSS: true
+          });
     } );
     
     }
